@@ -20,15 +20,16 @@
 
     <script>
       $(document).ready(function () {
-        $("#result").load("test.html", function(responseTxt, statusTxt, xhr) {
-           if (statusTxt === "success") {
-            alert("It went fine");
-           } else if (statusTxt === "error") {
-             alert("Error: " +xhr.statusText);
-           }
-
-        });
-        
+        // $("#result").load("test.html", function(responseTxt, statusTxt, xhr) {
+        //    if (statusTxt === "success") {
+        //     alert("It went fine");
+        //    } else if (statusTxt === "error") {
+        //      alert("Error: " +xhr.statusText);
+        //    }
+        // });
+        $.get("test.html", function(data) {
+          $("#result").html(data);
+        })
       });
     </script>
   </body>
