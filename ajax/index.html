@@ -15,6 +15,13 @@
     <div id="container">
       <div id="result">
         <ul id="users"></ul>
+        <h3>Add Post</h3>
+        <form id="postForm" action="https://jsonplaceholder.typicode.com/posts">
+          <input type="text" id="title" placeholder="Title" /> <br />
+
+          <textarea placeholder="Body" id="body"> </textarea><br />
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     </div>
 
@@ -37,16 +44,26 @@
         //   })
         // })
 
-        $.ajax({
-          method: "GET",
-          url: "https://jsonplaceholder.typicode.com/posts", 
-          dataType: "json",
-        }).done(function(data){
-          console.log(data);
-          $.map(data, function(post, i) {
-            $('#result').append('<h3>'+post.title+'</h3><p>'+post.body+'</p>');
-          })
-        })
+        // $.ajax({
+        //   method: "GET",
+        //   url: "https://jsonplaceholder.typicode.com/posts",
+        //   dataType: "json",
+        // }).done(function(data){
+        //   console.log(data);
+        //   $.map(data, function(post, i) {
+        //     $('#result').append('<h3>'+post.title+'</h3><p>'+post.body+'</p>');
+        //   })
+        // })
+        $("#postForm").submit(function (e) {
+          e.preventDefault();
+          const title = $("#title").val();
+          const body = $("#body").val();
+          const url = $(this).attr("action");
+          $.post(url, { title: title, body: body }).done(function (data) {
+            console.log("Post saved");
+            console.log(data);
+          });
+        });
       });
     </script>
   </body>
